@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Veículos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Gerenciador de Patrimônio </h1>
+        <nav>
+            <ul>
+    
+                <li><a href="#" id="abrirCadastro" onclick="document.getElementById('modalTipoVeiculo').classList.remove('hidden')">Cadastro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <h2>Buscar Patrimônio </h2>
+            <input type="number" id="buscaId" placeholder="Buscar por ID...">
+            <input type="text" id="buscaModelo" placeholder="Buscar por modelo...">
+            <input type="text" id="buscaFabricante" placeholder="Buscar por fabricante...">
+            <input type="text" id="buscaCor" placeholder="Buscar por cor...">
+            <input type="number" id="buscaAno" placeholder="Buscar por ano...">           
+            <button onclick="buscarVeiculos()">Buscar</button>
+        </section>
+
+        <section class="table-section">
+            <h2>Lista de Patrimônio </h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Patrimônio </th>
+                            <th>Unidade Policial</th>
+                            <th>OBJETO</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Preço</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaVeiculos"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+   <!-- Modal para Selecionar Tipo -->
+    <div id="modalTipoVeiculo" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" id="fecharTipoVeiculo" onclick="fecharModalTipoVeiculo()">✖</span>
+            <h2>Escolha o Tipo de Patrimônio </h2>
+            <button id="btnCarro" onclick="abrirFormulario('carro')">Carro</button>
+            <button id="btnMoto" onclick="abrirFormulario('moto')">Moto</button>
+        </div>
+    </div>
+
+    <!-- Modal para cadastro -->
+    <div id="modalCadastro" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" id="fecharCadastro" onclick="fecharFormulario()">✖</span>
+            <h2>Cadastrar Novo Patrimônio </h2>
+            <form id="formularioCadastro">
+                <label>Modelo:</label>
+                <input type="text" id="modelo">
+
+                <label>Fabricante:</label>
+                <input type="text" id="fabricante">
+
+                <label>Ano:</label>
+                <input type="number" id="ano">
+
+                <label>Preço:</label>
+                <input type="number" id="preco">
+                
+                <label>Cor:</label>
+                <input type="text" id="cor">
+
+            
+
+                <div id="extraCampos"></div>
+
+                <button type="button" onclick="cadastrarVeiculo()">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalEdicao" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" id="fecharEdicao" onclick="fecharModalEdicao()">✖</span>
+            <h2>Editar Patrimônio </h2>
+    
+            <input type="hidden" id="editId">
+    
+            <label>Modelo:</label>
+            <input type="text" id="editModelo">
+    
+            <label>Fabricante:</label>
+            <input type="text" id="editFabricante">
+    
+            <label>Cor:</label>
+            <input type="text" id="editCor">
+    
+            <label>Ano:</label>
+            <input type="number" id="editAno">
+    
+            <label>Preço:</label>
+            <input type="number" id="editPreco">
+    
+            <label>Tipo:</label>
+            <select id="editTipo" onchange="atualizarCamposEdicao()">
+                <option value="">Selecione</option>
+                <option value="carro">Carro</option>
+                <option value="moto">Moto</option>
+            </select>
+    
+            <div id="editExtraCampos"></div>
+    
+            <button id="salvarAlteracoes" onclick="atualizarVeiculo()">Salvar Alterações</button>
+        </div>
+    </div>
+
+    <div id="modalDetalhes" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModalDetalhes()">✖</span>
+            <h2>Detalhes do Patrimônio</h2>
+            <p><strong>ID:</strong> <span id="detalhesId"></span></p>
+            <p><strong>Modelo:</strong> <span id="detalhesModelo"></span></p>
+            <p><strong>Fabricante:</strong> <span id="detalhesFabricante"></span></p>
+            <p><strong>Ano:</strong> <span id="detalhesAno"></span></p>
+            <p><strong>Cor:</strong> <span id="detalhesCor"></span></p>
+            <p><strong>Preço:</strong> <span id="detalhesPreco"></span></p>
+            <p><strong>Tipo:</strong> <span id="detalhesTipo"></span></p>
+            <div id="extraDetalhes"></div>
+            <button onclick="fecharModalDetalhes()">Fechar</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Feito por <strong>Antony Michael</strong></p>
+    </footer>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
